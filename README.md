@@ -7,6 +7,7 @@
 **Programme / Class Code:** CA/DICT/25/11320  
 **Course:** Web design and hosting  
 **Assessment:** O-Level Student Management System 
+**Link** https://mulocoz8-oss.github.io/assigment_web/
 
 ---
 
