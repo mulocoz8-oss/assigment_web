@@ -1,0 +1,102 @@
+body {
+    font-family: Arial;
+    padding: 20px;
+}
+
+input, select {
+    padding: 5px;
+    margin: 5px;
+}
+
+button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* ================= BODY ================= */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #7AB2B2;
+    margin: 0;
+}
+
+/* ================= HEADINGS ================= */
+h1 {
+    text-align: center;
+    color: white;
+    background-color: #088395;
+    padding: 15px;
+    margin: -20px -20px 20px -20px;
+}
+
+h2, h3 {
+    color: #09637E;
+}
+
+/* ================= INPUTS & SELECT ================= */
+input, select {
+    padding: 7px;
+    margin: 5px;
+    border: 1px solid #09637E;
+    border-radius: 4px;
+}
+
+/* ================= BUTTONS ================= */
+button {
+    padding: 7px 12px;
+    cursor: pointer;
+    background-color: #088395;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #09637E;
+}
+
+/* ================= TABLE ================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: white;
+}
+
+th {
+    background-color: #088395;
+    color: white;
+}
+
+th, td {
+    border: 1px solid #09637E;
+    padding: 8px;
+    text-align: center;
+}
+
+/* ================= LINKS (Landing Page Button) ================= */
+a button {
+    background-color: #088395;
+}
+
+a button:hover {
+    background-color: #09637E;
+}
