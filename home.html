@@ -1,87 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tanzania O-Level Student Management System</title>
+    <title>TARANGIRE SECONDARY SCHOOL</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Tanzania O-Level Student Management System</h1>
+<h1>TARANGIRE SECONDARY SCHOOL</h1>
 
-<!-- ================= REGISTER STUDENT ================= -->
-<h2>Register Student</h2>
-
-<form id="studentForm">
-    <input type="text" id="name" placeholder="Full Name" required>
-    <input type="text" id="studentId" placeholder="Student ID" required>
-    <input type="number" id="age" placeholder="Age" required>
-
-    <select id="gender" required>
-        <option value="">Gender</option>
-        <option>Male</option>
-        <option>Female</option>
-    </select>
-
-    <select id="formLevel" required>
-        <option value="">Select Form</option>
-        <option value="1">Form I</option>
-        <option value="2">Form II</option>
-        <option value="3">Form III</option>
-        <option value="4">Form IV</option>
-    </select>
-
-    <button type="submit">Register Student</button>
-</form>
+<!-- ================= SLIDING IMAGES ================= -->
+<div class="slider">
+    <img class="slide active" src="images/R.png" alt="Students">
+    <img class="slide" src="images/school.jpg" alt="Classroom">
+    <img class="slide" src="images/classroom.jpg" alt="School Environment">
+    <div class="overlay">
+        <h2>O-Level Student Management System</h2>
+        <p>Manage Students from Form I to Form IV</p>
+        <a href="index.html"><button>Enter System</button></a>
+    </div>
+</div>
 
 <hr>
 
-<!-- ================= FORM DASHBOARD ================= -->
-<h2>Class Dashboard</h2>
+<h2 class="welcome">Welcome</h2>
+<p>This system is designed to manage O-Level students from Form I to Form IV according to the Tanzania Education System.</p>
 
-<select id="formSelector">
-    <option value="">Select Class</option>
-    <option value="1">Form I</option>
-    <option value="2">Form II</option>
-    <option value="3">Form III</option>
-    <option value="4">Form IV</option>
-</select>
+<ul>
+    <li>Student Registration ✔</li>
+    <li>Class Dashboard ✔</li>
+    <li>Add / Update Performance ✔</li>
+    <li>Automatic Average ✔</li>
+    <li>Promotion Logic ✔</li>
+    <li>Delete ✔</li>
+    <li>Subject-wise Performance Analysis ✔</li>
+    <li>Dashboard with Academic Year ✔</li>
+</ul>
 
-<button onclick="loadClass()">Load Class</button>
-
-<h3>Students in Selected Class</h3>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Average</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody id="classTable"></tbody>
-</table>
-
-<hr>
-
-<!-- ================= SUBJECT PERFORMANCE ================= -->
-<h2>Subject Performance Analysis</h2>
-
-<select id="subjectSelector">
-    <option value="">Select Subject</option>
-    <option>Mathematics</option>
-    <option>English</option>
-    <option>Kiswahili</option>
-    <option>Biology</option>
-    <option>Chemistry</option>
-    <option>Physics</option>
-    <option>History</option>
-    <option>Geography</option>
-    <option>Civics</option>
-</select>
-
-<button onclick="analyzeSubject()">Analyze</button>
-
-<p id="subjectResult"></p>
+<p><br>Developed for O-Level Practical Assessment<br>JavaScript Web Application Project</p>
 
 <script src="script.js"></script>
 </body>
