@@ -1,147 +1,165 @@
+// ================= IMAGE SLIDER =================
+let slides = document.querySelectorAll(".slide");
+let currentSlide = 0;
+if(slides.length>0){
+    setInterval(()=>{
+        slides[currentSlide].classList.remove("active");
+        currentSlide++;
+        if(currentSlide>=slides.length) currentSlide=0;
+        slides[currentSlide].classList.add("active");
+    },3000);
+}
+
 // ================= DATA STORAGE =================
 let students = [];
 
-// Tanzania O-Level Subjects
-const subjects = [
-    "Mathematics", "English", "Kiswahili",
-    "Biology", "Chemistry", "Physics",
-    "History", "Geography", "Civics"
-];
-
 // ================= REGISTER STUDENT =================
-document.getElementById("studentForm").addEventListener("submit", function(e) {
+document.getElementById("studentForm").addEventListener("submit", e=>{
     e.preventDefault();
+    let name = document.getElementById("studentName").value.trim();
+    let studentId = document.getElementById("studentId").value.trim();
+    let age = parseInt(document.getElementById("studentAge").value);
+    let gender = document.getElementById("studentGender").value;
+    let form = parseInt(document.getElementById("studentFormLevel").value);
+    let year = document.getElementById("academicYear").value;
 
-    let name = document.getElementById("name").value.trim();
-    let id = document.getElementById("studentId").value.trim();
-    let age = parseInt(document.getElementById("age").value);
-    let gender = document.getElementById("gender").value;
-    let form = parseInt(document.getElementById("formLevel").value);
-
-    if (!/^[A-Za-z ]+$/.test(name)) {
-        alert("Invalid name.");
-        return;
+    if(!name || !studentId || !age || !gender || !form || !year){
+        alert("Please fill all fields"); return;
+    }
+    if(students.some(s=>s.id===studentId && s.academicYear===year)){
+        alert("Student ID must be unique for this academic year"); return;
     }
 
-    if (students.some(s => s.id === id)) {
-        alert("ID must be unique.");
-        return;
-    }
-
-    students.push({
-        id,
-        name,
-        age,
-        gender,
-        form,
-        performance: []
-    });
-
-    alert("Student Registered Successfully.");
-    this.reset();
+    students.push({id: studentId,name,age,gender,form,academicYear: year,performance: []});
+    alert("Student registered successfully");
+    document.getElementById("studentForm").reset();
+    updateDashboard();
+    displayStudents();
 });
 
-// ================= LOAD CLASS DASHBOARD =================
-function loadClass() {
+// ================= DISPLAY STUDENTS =================
+function displayStudents(){
+    let tbody = document.getElementById("studentTableBody");
+    tbody.innerHTML = "";
+    let year = document.getElementById("academicYear").value;
+    let filtered = students.filter(s=>s.academicYear===year);
 
-    let selectedForm = parseInt(document.getElementById("formSelector").value);
-    let table = document.getElementById("classTable");
-    table.innerHTML = "";
-
-    let classStudents = students.filter(s => s.form === selectedForm);
-
-    classStudents.forEach((student, index) => {
-
-        table.innerHTML += `
-        <tr>
-            <td>${student.id}</td>
-            <td>${student.name}</td>
-            <td>${calculateAverage(student)}</td>
-            <td>
-                <button onclick="addResults('${student.id}')">
-                Add Results
-                </button>
-            </td>
-        </tr>
-        `;
+    filtered.forEach(s=>{
+        let avg = calculateAverage(s);
+        tbody.innerHTML+=`
+            <tr>
+                <td>${s.id}</td>
+                <td>${s.name}</td>
+                <td>Form ${s.form}</td>
+                <td>${avg}</td>
+                <td>
+                    <button onclick="viewStudent('${s.id}')">View</button>
+                    <button class="promo" onclick="promoteStudent('${s.id}')">Promote</button>
+                    <button class="delete-btn" onclick="deleteStudent('${s.id}')">Delete</button>
+                </td>
+            </tr>`;
     });
 }
 
-// ================= TEACHER ADD RESULTS =================
-function addResults(studentId) {
+// ================= VIEW STUDENT =================
+function viewStudent(id){
+    let student = students.find(s=>s.id===id);
+    let div = document.getElementById("studentDetails");
+    let html = `<p><strong>ID:</strong>${student.id}</p>
+                <p><strong>Name:</strong>${student.name}</p>
+                <p><strong>Age:</strong>${student.age}</p>
+                <p><strong>Gender:</strong>${student.gender}</p>
+                <p><strong>Form:</strong>${student.form}</p>
+                <button onclick="addPerformance('${student.id}')">Add / Update Performance</button>`;
 
-    let student = students.find(s => s.id === studentId);
+    student.performance.forEach(p=>{
+        html+=`<p><strong>Form ${p.form}</strong></p>
+               <ul>
+                <li>Math: ${p.subjects.math}</li>
+                <li>English: ${p.subjects.english}</li>
+                <li>Science: ${p.subjects.science}</li>
+                <li>Social Studies: ${p.subjects.social}</li>
+               </ul>`;
+    });
+    div.innerHTML = html;
+}
 
-    let record = {
-        form: student.form,
-        subjects: {}
-    };
+// ================= ADD / UPDATE PERFORMANCE =================
+function addPerformance(id){
+    let student = students.find(s=>s.id===id);
+    let math=parseInt(prompt("Math Score:"));
+    let english=parseInt(prompt("English Score:"));
+    let science=parseInt(prompt("Science Score:"));
+    let social=parseInt(prompt("Social Studies Score:"));
 
-    for (let i = 0; i < subjects.length; i++) {
+    if([math,english,science,social].some(isNaN)){ alert("Invalid scores"); return; }
 
-        let score = parseInt(prompt(subjects[i] + " score:"));
+    let record = {form: student.form, subjects:{math,english,science,social}};
+    let existing = student.performance.find(p=>p.form===student.form);
+    if(existing) existing.subjects = record.subjects; else student.performance.push(record);
 
-        if (isNaN(score) || score < 0 || score > 100) {
-            alert("Invalid score.");
-            return;
-        }
-
-        record.subjects[subjects[i]] = score;
-    }
-
-    student.performance.push(record);
-
-    alert("Results Added Successfully.");
+    viewStudent(id); displayStudents(); updateDashboard();
 }
 
 // ================= CALCULATE AVERAGE =================
-function calculateAverage(student) {
-
-    if (student.performance.length === 0) return "N/A";
-
-    let latest = student.performance[student.performance.length - 1];
-    let scores = Object.values(latest.subjects);
-
-    let total = scores.reduce((sum, val) => sum + val, 0);
-    return (total / scores.length).toFixed(2);
-}
-
-// ================= SUBJECT PERFORMANCE ANALYSIS =================
-function analyzeSubject() {
-
-    let subject = document.getElementById("subjectSelector").value;
-
-    if (!subject) {
-        alert("Select subject first.");
-        return;
-    }
-
-    let scores = [];
-
-    students.forEach(student => {
-        if (student.performance.length > 0) {
-            let latest = student.performance[student.performance.length - 1];
-            if (latest.subjects[subject] !== undefined) {
-                scores.push(latest.subjects[subject]);
-            }
-        }
+function calculateAverage(student){
+    if(student.performance.length===0) return 0;
+    let total=0,count=0;
+    student.performance.forEach(p=>{
+        for(let key in p.subjects){total+=p.subjects[key]; count++;}
     });
-
-    if (scores.length === 0) {
-        document.getElementById("subjectResult").innerText =
-            "No data available.";
-        return;
-    }
-
-    let total = scores.reduce((a, b) => a + b, 0);
-    let avg = (total / scores.length).toFixed(2);
-
-    let highest = Math.max(...scores);
-    let lowest = Math.min(...scores);
-
-    document.getElementById("subjectResult").innerText =
-        `Subject: ${subject}
-        | Average: ${avg}
-        | Highest: ${highest}
-        | Lowest: ${lowest}`;
+    return (total/count).toFixed(2);
 }
+
+// ================= PROMOTE =================
+function promoteStudent(id){
+    let student=students.find(s=>s.id===id);
+    if(student.form<4){ student.form++; alert("Student promoted!"); }
+    else alert("Student has completed O-Level.");
+    displayStudents(); viewStudent(id); updateDashboard();
+}
+
+// ================= DELETE =================
+function deleteStudent(id){
+    let year = document.getElementById("academicYear").value;
+    students = students.filter(s=>!(s.id===id && s.academicYear===year));
+    document.getElementById("studentDetails").innerHTML="";
+    displayStudents(); updateDashboard();
+}
+
+// ================= SEARCH =================
+function searchStudent(){
+    let id = prompt("Enter Student ID:");
+    let year = document.getElementById("academicYear").value;
+    let student = students.find(s=>s.id===id && s.academicYear===year);
+    if(student){ viewStudent(id); alert("Student found: "+student.name);}
+    else alert("Student not found.");
+}
+
+// ================= DASHBOARD =================
+function updateDashboard(){
+    let year = document.getElementById("academicYear").value;
+    let filtered = students.filter(s=>s.academicYear===year);
+
+    document.getElementById("totalForm1").innerText=filtered.filter(s=>s.form===1).length;
+    document.getElementById("totalForm2").innerText=filtered.filter(s=>s.form===2).length;
+    document.getElementById("totalForm3").innerText=filtered.filter(s=>s.form===3).length;
+    document.getElementById("totalForm4").innerText=filtered.filter(s=>s.form===4).length;
+
+    let subjects=["math","english","science","social"];
+    let ul=document.getElementById("subjectAverages");
+    ul.innerHTML="";
+    subjects.forEach(sub=>{
+        let total=0,count=0;
+        filtered.forEach(s=>s.performance.forEach(p=>{
+            if(p.subjects[sub]!==undefined){ total+=p.subjects[sub]; count++;}
+        }));
+        let avg = count>0 ? (total/count).toFixed(2) : 0;
+        ul.innerHTML+=`<li>${sub.charAt(0).toUpperCase()+sub.slice(1)}: ${avg}</li>`;
+    });
+}
+
+// ================= UPDATE DASHBOARD ON YEAR CHANGE =================
+document.getElementById("academicYear").addEventListener("change", ()=>{
+    updateDashboard(); displayStudents();
+});
