@@ -1,102 +1,120 @@
+
 body {
-    font-family: Arial;
-    padding: 20px;
-}
-
-input, select {
-    padding: 5px;
-    margin: 5px;
-}
-
-button {
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-th, td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: center;
-}
-
-h1 {
-    text-align: center;
-}
-
-/* ================= BODY ================= */
-body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #7AB2B2;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
+    /* School-themed gradient: deep blue → light blue → golden */
+    background: linear-gradient(135deg, #4d759c, #547391, #7384a5);
+    color: #ffffff;
 }
 
-/* ================= HEADINGS ================= */
-h1 {
+h1, h2, h3 {
     text-align: center;
+    
+}
+.start{
+    text-align: left;
+}
+.welcome{
+    color: #ffcc00;
+}
+
+.slider {
+    position: relative;
+    height: 60vh;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.slider img {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+    display: none;
+}
+
+.slider img.active {
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 60vh;
+    background: rgba(0,0,0,0.5);
     color: white;
-    background-color: #088395;
-    padding: 15px;
-    margin: -20px -20px 20px -20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-h2, h3 {
-    color: #09637E;
-}
-
-/* ================= INPUTS & SELECT ================= */
-input, select {
-    padding: 7px;
-    margin: 5px;
-    border: 1px solid #09637E;
-    border-radius: 4px;
-}
-
-/* ================= BUTTONS ================= */
 button {
-    padding: 7px 12px;
-    cursor: pointer;
-    background-color: #088395;
-    color: white;
+    padding: 12px 20px;
+    background-color: #ffcc00;
     border: none;
-    border-radius: 4px;
-    transition: 0.3s;
+    color: #003366;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    opacity: 0.8;
+   
+}
+.delete{
+    background-color: red !important;
 }
 
 button:hover {
-    background-color: #09637E;
+    opacity: 1;
 }
 
-/* ================= TABLE ================= */
+.delete-btn{
+  background-color: red;
+  font-weight: bold;
+}
+.promo{
+    background-color: green;
+     font-weight: bold;
+}
+.promo:hover{
+     font-weight: bold;
+
+}
+
+form, table, #studentDetails {
+    background: rgba(255,255,255,0.95);
+    color: black;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px auto;
+    width: 90%;
+}
+
+input, select, button {
+    padding: 8px;
+    margin: 5px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
-    background-color: white;
-}
-
-th {
-    background-color: #088395;
-    color: white;
 }
 
 th, td {
-    border: 1px solid #09637E;
-    padding: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
     text-align: center;
 }
 
-/* ================= LINKS (Landing Page Button) ================= */
-a button {
-    background-color: #088395;
+th {
+    background-color: #003366;
+    color: white;
 }
 
-a button:hover {
-    background-color: #09637E;
+#subjectResult {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
 }
