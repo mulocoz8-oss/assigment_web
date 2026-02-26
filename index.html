@@ -1,44 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tanzania O-Level Student Management System</title>
+    <title>TARANGIRE SECONDARY SCHOOL - Student Management</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>O-Level Student Management System</h1>
+<h1>TARANGIRE SECONDARY SCHOOL</h1>
+
+<!-- ================= ACADEMIC YEAR ================= -->
+<h2>Academic Year</h2>
+<select id="academicYear">
+    <option value="2025">2025</option>
+    <option value="2026" selected>2026</option>
+    <option value="2027">2027</option>
+</select>
 
 <hr>
 
-<h2>Welcome</h2>
+<!-- ================= REGISTER STUDENT ================= -->
+<h2>Register Student</h2>
+<form id="studentForm">
+    <input type="text" id="studentName" placeholder="Full Name" required>
+    <input type="text" id="studentId" placeholder="Student ID" required>
+    <input type="number" id="studentAge" placeholder="Age" required>
+    <select id="studentGender" required>
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+    <select id="studentFormLevel" required>
+        <option value="">Select Form</option>
+        <option value="1">Form 1</option>
+        <option value="2">Form 2</option>
+        <option value="3">Form 3</option>
+        <option value="4">Form 4</option>
+    </select>
+    <button type="submit">Register Student</button>
+</form>
 
-<p>
-This system is designed to manage O-Level students from 
-Form I to Form IV according to the Tanzania Education System.
-</p>
+<hr>
 
-<ul>
-    <li>✔ Student Registration</li>
-    <li>✔ Class-Based Dashboards</li>
-    <li>✔ Teacher Result Entry</li>
-    <li>✔ Subject Performance Analysis</li>
-    <li>✔ Academic Tracking</li>
-</ul>
+<!-- ================= DASHBOARD ================= -->
+<h2>Dashboard</h2>
+<div id="dashboard">
+    <h3>Total Students Per Class</h3>
+    <ul>
+        <li>Form 1: <span id="totalForm1">0</span></li>
+        <li>Form 2: <span id="totalForm2">0</span></li>
+        <li>Form 3: <span id="totalForm3">0</span></li>
+        <li>Form 4: <span id="totalForm4">0</span></li>
+    </ul>
 
-<br>
+    <h3>Average Performance per Subject</h3>
+    <ul id="subjectAverages">
+        <!-- dynamically filled by JS -->
+    </ul>
+</div>
 
-<h2>Get Started</h2>
+<hr>
 
-<a href="home.html">
-    <button>Enter System</button>
-</a>
+<!-- ================= SEARCH ================= -->
+<button onclick="searchStudent()">Search Student</button>
 
-<br><br>
+<hr>
 
-<p>
-Developed for O-Level Practical Assessment<br>
-JavaScript Web Application Project
-</p>
+<!-- ================= STUDENT TABLE ================= -->
+<h2>Registered Students</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Form</th>
+            <th>Average</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="studentTableBody"></tbody>
+</table>
 
+<hr>
+
+<!-- ================= STUDENT DETAILS ================= -->
+<h2>Student Details</h2>
+<div id="studentDetails"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
