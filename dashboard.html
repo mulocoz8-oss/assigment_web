@@ -1,16 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Management Registration Page</title>
+    <title>TARANGIRE SECONDARY SCHOOL - Student Management</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to the Student Management System</h1>
-    <form>
-        <label for="studentName">Student Name:</label><br>
-        <input type="text" id="studentName" name="studentName"><br>
-        <label for="studentEmail">Email:</label><br>
-        <input type="email" id="studentEmail" name="studentEmail"><br>
-        <input type="submit" value="Register">
-    </form>
+
+<h1>TARANGIRE SECONDARY SCHOOL</h1>
+
+<!-- ================= ACADEMIC YEAR ================= -->
+<h2>Academic Year</h2>
+<select id="academicYear">
+    <option value="2025">2025</option>
+    <option value="2026" selected>2026</option>
+    <option value="2027">2027</option>
+</select>
+
+<hr>
+
+<!-- ================= REGISTER STUDENT ================= -->
+<h2>Register Student</h2>
+<form id="studentForm">
+    <input type="text" id="studentName" placeholder="Full Name" required>
+    <input type="text" id="studentId" placeholder="Student ID" required>
+    <input type="number" id="studentAge" placeholder="Age" required>
+    <select id="studentGender" required>
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+    <select id="studentFormLevel" required>
+        <option value="">Select Form</option>
+        <option value="1">Form 1</option>
+        <option value="2">Form 2</option>
+        <option value="3">Form 3</option>
+        <option value="4">Form 4</option>
+    </select>
+    <button type="submit">Register Student</button>
+</form>
+
+<hr>
+
+<!-- ================= DASHBOARD ================= -->
+<h2>Dashboard</h2>
+<div id="dashboard">
+    <h3>Total Students Per Class</h3>
+    <ul>
+        <li>Form 1: <span id="totalForm1">0</span></li>
+        <li>Form 2: <span id="totalForm2">0</span></li>
+        <li>Form 3: <span id="totalForm3">0</span></li>
+        <li>Form 4: <span id="totalForm4">0</span></li>
+    </ul>
+
+    <h3>Average Performance per Subject</h3>
+    <ul id="subjectAverages">
+        <!-- dynamically filled by JS -->
+    </ul>
+</div>
+
+<hr>
+
+<!-- ================= SEARCH ================= -->
+<button onclick="searchStudent()">Search Student</button>
+
+<hr>
+
+<!-- ================= STUDENT TABLE ================= -->
+<h2>Registered Students</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Form</th>
+            <th>Average</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="studentTableBody"></tbody>
+</table>
+
+<hr>
+
+<!-- ================= STUDENT DETAILS ================= -->
+<h2>Student Details</h2>
+<div id="studentDetails"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
