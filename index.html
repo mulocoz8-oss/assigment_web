@@ -1,42 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TARANGIRE SECONDARY SCHOOL</title>
+    <title>O-TARANGILE SECONDARY SCHOOL </title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>TARANGIRE SECONDARY SCHOOL</h1>
+<h1>TARANGIRE SECONDARY SCHOOL </h1>
 
-<!-- ================= SLIDING IMAGES ================= -->
-<div class="slider">
-    <img class="slide active" src="images/R.png" alt="Students">
-    <img class="slide" src="images/school.jpg" alt="Classroom">
-    <img class="slide" src="images/classroom.jpg" alt="School Environment">
-    <div class="overlay">
-        <h2>O-Level Student Management System</h2>
-        <p>Manage Students from Form I to Form IV</p>
-        <a href="home.html"><button>Enter System</button></a>
-    </div>
-</div>
+<!-- Academic Year -->
+<h2>Academic Year</h2>
+<input type="text" id="academicYear" placeholder="e.g. 2026">
+<button onclick="setAcademicYear()">Set Year</button>
+<p id="yearDisplay"></p>
 
 <hr>
 
-<h2 class="welcome">Welcome</h2>
-<p>This system is designed to manage O-Level students from Form I to Form IV according to the Tanzania Education System.</p>
+<!-- Dashboard -->
+<h2>Dashboard</h2>
+<div id="dashboard"></div>
 
-<ul>
-    <li>Student Registration ✔</li>
-    <li>Class Dashboard ✔</li>
-    <li>Add / Update Performance ✔</li>
-    <li>Automatic Average ✔</li>
-    <li>Promotion Logic ✔</li>
-    <li>Delete ✔</li>
-    <li>Subject-wise Performance Analysis ✔</li>
-    <li>Dashboard with Academic Year ✔</li>
-</ul>
+<hr>
 
-<p><br>Developed for O-Level Practical Assessment<br>JavaScript Web Application Project</p>
+<!-- Registration -->
+<h2>Register Student</h2>
+<form id="studentForm">
+    <input type="text" id="studentName" placeholder="Full Name" required>
+    <input type="text" id="studentId" placeholder="Student ID" required>
+    <input type="number" id="studentAge" placeholder="Age" required>
+
+    <select id="studentGender" required>
+        <option value="">Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+
+    <select id="studentFormLevel" required>
+        <option value="">Form</option>
+        <option value="1">Form 1</option>
+        <option value="2">Form 2</option>
+        <option value="3">Form 3</option>
+        <option value="4">Form 4</option>
+    </select>
+
+    <button type="submit">Register</button>
+</form>
+
+<hr>
+
+<button onclick="searchStudent()">Search Student</button>
+
+<hr>
+
+<h2>Registered Students</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Form</th>
+            <th>Average</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="studentTableBody"></tbody>
+</table>
+
+<hr>
+
+<h2>Student Details</h2>
+<div id="studentDetails"></div>
+
+<hr>
+
+<h2>Subject Performance Analysis</h2>
+<div id="subjectAnalysis"></div>
 
 <script src="script.js"></script>
 </body>
